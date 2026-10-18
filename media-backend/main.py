@@ -47,14 +47,13 @@ def validate_url(raw: str) -> str:
     return raw
 
 def ydl_options():
-    # No browser cookies, account sessions, proxy rotation, or private access.
     return {
         "quiet": True,
         "no_warnings": True,
         "noplaylist": True,
         "skip_download": True,
-        "extractor_retries": 1,
-        "socket_timeout": 15,
+        "extractor_retries": 3,
+        "socket_timeout": 30,
         "cachedir": False,
     }
 
