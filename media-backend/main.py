@@ -157,7 +157,7 @@ def download(body: DownloadRequest):
             "noplaylist": True,
             "cachedir": False,
             "outtmpl": os.path.join(tempdir, "%(title).100B-%(id)s.%(ext)s"),
-            "format": body.format_id,
+            "format": f"{body.format_id}+bestaudio/{body.format_id}",
             "max_filesize": MAX_FILE_BYTES,
             "socket_timeout": 20,
             "retries": 1,
