@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CleanDrop — Media, without the noise",
+  title: "heifdrop – Media, without the noise",
   description: "A clean, no-ad interface for saving media you have permission to download.",
 };
 
