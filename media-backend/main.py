@@ -53,7 +53,8 @@ def ydl_options():
         "noplaylist": True,
         "skip_download": True,
         "extractor_retries": 3,
-        "socket_timeout": 30,
+       "socket_timeout": 30,
+"extractor_args": {"youtube": {"player_client": ["android_vr"]}},
         "cachedir": False,
     }
 
