@@ -78,7 +78,7 @@ def resolve(body: ResolveRequest):
     try:
         with yt_dlp.YoutubeDL(ydl_options()) as ydl:
             info = ydl.extract_info(url, download=False)
-       except Exception as e:
+    except Exception as e:
         print(f"Resolve failed: {type(e).__name__}: {e}", flush=True)
         raise HTTPException(
             status_code=422,
