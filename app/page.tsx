@@ -25,7 +25,7 @@ export default function Home() {
     try {
       const res = await fetch("/api/resolve", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: url.trim() }) });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "This link could not be processed.");
+      if (!res.ok) throw new Error((typeof data.detail === "string" ? data.detail : data.error) || "This link could not be processed.");
       setResult(data);
       if (data.formats?.length) setSelected(data.formats[0].id);
     } catch (err) { setError(err instanceof Error ? err.message : "Something went wrong. Please try again."); }
