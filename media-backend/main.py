@@ -49,12 +49,13 @@ def validate_url(raw: str) -> str:
 def ydl_options():
     return {
         "quiet": True,
-        "no_warnings": True,
+        "no_warnings": False,
         "noplaylist": True,
         "skip_download": True,
         "extractor_retries": 3,
-       "socket_timeout": 30,
-"extractor_args": {"youtube": {"player_client": ["android_vr"]}},
+        "socket_timeout": 30,
+        # Use yt-dlp maintained default clients and the runtime installed in Docker.
+        "js_runtimes": {"node": {}},
         "cachedir": False,
     }
 
@@ -149,8 +150,10 @@ def download(body: DownloadRequest):
         if body.format_id not in available:
             raise HTTPException(status_code=400, detail="That format is no longer available. Check the link again.")
         opts = {
+            **ydl_options(),
+            "skip_download": False,
             "quiet": True,
-            "no_warnings": True,
+            "no_warnings": False,
             "noplaylist": True,
             "cachedir": False,
             "outtmpl": os.path.join(tempdir, "%(title).100B-%(id)s.%(ext)s"),
