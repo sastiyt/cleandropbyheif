@@ -78,8 +78,12 @@ def resolve(body: ResolveRequest):
     try:
         with yt_dlp.YoutubeDL(ydl_options()) as ydl:
             info = ydl.extract_info(url, download=False)
-    except Exception:
-        raise HTTPException(status_code=422, detail="Could not read this link. It may be unavailable, restricted, or unsupported.")
+       except Exception as e:
+        print(f"Resolve failed: {type(e).__name__}: {e}", flush=True)
+        raise HTTPException(
+            status_code=422,
+            detail="Could not read this link. It may be unavailable, restricted, or unsupported."
+        )
     formats = []
     seen = set()
     for f in info.get("formats") or []:
